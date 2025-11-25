@@ -19,7 +19,7 @@ Also, right clicking the Stampy tray icon will open a context menu which lets yo
 
 ## Editing and deleting entries
 Via right clicking an entry in the time table it can be changed or deleted.<br>
-Week or month can be switched through by the up/down arrows next to the date string.
+The displayed day can be switched through by the up/down arrows next to the date string.
 
 ![Stampy time table context menu](docs/images/Stampy_context.png)
 ![Stampy change entry window](docs/images/Stampy_change.png)
