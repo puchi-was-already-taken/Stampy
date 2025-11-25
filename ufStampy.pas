@@ -1117,10 +1117,9 @@ begin
         FHeight := Height;
 
         Width := Width - pMain.Width;
-        Height := Height + (bPause.Top - bStop.Top);
+        Height := Height - (bSwitchMode.Top - bPause.Top) + (bPause.Top - bStop.Top);
 
         pMain.Visible := False;
-        bPause.Visible := False;
 
         pButtons.Align := alClient;
 
