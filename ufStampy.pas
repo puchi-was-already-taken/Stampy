@@ -1232,6 +1232,11 @@ begin
     then
   begin
     UpdateTimers;
+
+    TrayIcon.Hint := Caption
+      + #13#10 + 'Status: ' + lStatus.Caption
+      + #13#10 + lWorkTimeDesc.Caption + ' ' + lWorkTime.Caption
+      + #13#10 + lPauseTimeDesc.Caption + ' ' + lPauseTime.Caption;
   end;
 end;
 
@@ -1293,11 +1298,6 @@ begin
 
   lWorkTime.Caption := BaseDiffString(WorkTime, GetWeeklyHours / 24 / GetWeeklyWorkDays);
   lPauseTime.Caption := BaseDiffString(PauseTime, GetStdPauseDuration / 24 / 60);
-
-  TrayIcon.Hint := Caption
-    + #13#10 + 'Status: ' + lStatus.Caption
-    + #13#10 + lWorkTimeDesc.Caption + ' ' + lWorkTime.Caption
-    + #13#10 + lPauseTimeDesc.Caption + ' ' + lPauseTime.Caption;
 end;
 
 procedure TfStampy.UpdateTimerTimer(Sender: TObject);
@@ -1490,8 +1490,6 @@ begin
 end;
 
 procedure TfStampy.AddPeriodToCurrentDay(const Period: TPeriod);
-var
-  SecondToLastPeriod: TPeriod;
 begin
   BeginUpdate;
   try
@@ -1511,22 +1509,6 @@ begin
   finally
     EndUpdate;
   end;
-
-  TrayIcon.BalloonTitle := 'Startet ' + HoursTypeNames[FLastPeriod.State];
-  TrayIcon.BalloonHint := 'Startet ' + HoursTypeNames[FLastPeriod.State] + ' at ' +
-    TimeToStr(FLastPeriod.Start);
-  if FCurrentDay.Count > 2 then
-  begin
-    SecondToLastPeriod := FCurrentDay[FCurrentDay.Count - 2];
-
-    TrayIcon.BalloonHint := TrayIcon.BalloonHint
-      + #13#10 + 'Last Period: ' + HoursTypeNames[SecondToLastPeriod.State] + ' for ' +
-      FormatDateTime('hh"h":nn"m"', SecondToLastPeriod.Duration)
-      + #13#10 + 'From ' + TimeToStr(SecondToLastPeriod.Start) + #9 + 'To ' +
-      TimeToStr(SecondToLastPeriod.Stop);
-  end;
-
-  TrayIcon.ShowBalloonHint;
 end;
 
 procedure TfStampy.AnalyseMonths(const StartDay,
