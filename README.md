@@ -1,6 +1,6 @@
 # Stampy
-Stampy is very basic Windows application to track your working hours.<br>
-The data is recorded locally only.
+Stampy is a very basic Windows application to track your working hours.<br>
+The data is recorded locally only!
 
 ![Stampy normal mode](docs/images/Stampy_main.png)
 
@@ -25,8 +25,8 @@ The displayed day can be switched through by the up/down arrows next to the date
 ![Stampy change entry window](docs/images/Stampy_change.png)
 
 ## Work time analysis
-On tab `Time Domain Analysis` an analysis of the recorded work time can be performed for a week or a month.<br>
-Week or month can be switched through by the up/down arrows next to `Count:`.<br>
+On tab `Time Domain Analysis` an analysis of the recorded work time can be performed for a weeks or a months.<br>
+The number of weeks or months to be analyzed can be switched through by the up/down arrows next to `Count:`.<br>
 The calculations will use the configured options on the `Options` tab to evaluate your worked hours, your quota and the difference of those two (that is overtime or missing hours).
 
 ![Stampy analysis](docs/images/Stampy_analysis.png)
