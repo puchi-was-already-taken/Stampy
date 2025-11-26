@@ -5,6 +5,16 @@ All your data is stored locally!
 
 ![Stampy normal mode](docs/images/Stampy_main.png)
 
+## Installation
+
+To use this application, no installation is needed.<br>
+On first time use, just download the latest release and extract the content of the zip file to a folder of your choice.
+
+If you want to *update* the application, **only extract and replace the executable!**
+> ⚠️ **Important:**<br>
+Avoid replacing `StampyWorkingHours.sqlite3` during updates.<br>
+**Otherwise you will lose all your data!**
+
 ## Simple Mode
 
 In Simple Mode only the necessary buttons to change your working state are displayed.
