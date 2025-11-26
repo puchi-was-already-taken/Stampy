@@ -2,8 +2,8 @@ object fStampy: TfStampy
   Left = 0
   Top = 0
   Caption = 'Stampy Working Hours'
-  ClientHeight = 405
-  ClientWidth = 896
+  ClientHeight = 311
+  ClientWidth = 434
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -4765,9 +4765,10 @@ object fStampy: TfStampy
     Left = 0
     Top = 0
     Width = 81
-    Height = 405
+    Height = 311
     Align = alLeft
     TabOrder = 0
+    ExplicitHeight = 405
     object bStop: TButton
       Left = 1
       Top = 26
@@ -4797,7 +4798,7 @@ object fStampy: TfStampy
     end
     object bSwitchMode: TButton
       Left = 1
-      Top = 389
+      Top = 295
       Width = 79
       Height = 15
       Action = acSwitchMode
@@ -4809,22 +4810,26 @@ object fStampy: TfStampy
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      ExplicitTop = 389
     end
   end
   object pMain: TPanel
     Left = 81
     Top = 0
-    Width = 815
-    Height = 405
+    Width = 353
+    Height = 311
     Align = alClient
     TabOrder = 1
+    ExplicitWidth = 815
+    ExplicitHeight = 405
     object pCurrentDayStatistics: TPanel
       Left = 1
       Top = 1
-      Width = 813
+      Width = 351
       Height = 41
       Align = alTop
       TabOrder = 0
+      ExplicitWidth = 813
       object lWorkTimeDesc: TLabel
         Left = 8
         Top = 3
@@ -4854,7 +4859,7 @@ object fStampy: TfStampy
         Caption = '---'
       end
       object lStatus: TLabel
-        Left = 706
+        Left = 244
         Top = 1
         Width = 106
         Height = 39
@@ -4866,14 +4871,15 @@ object fStampy: TfStampy
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        ExplicitLeft = 706
         ExplicitHeight = 33
       end
     end
     object pcMain: TPageControl
       Left = 1
       Top = 42
-      Width = 813
-      Height = 362
+      Width = 351
+      Height = 268
       ActivePage = tsCurrentDay
       Align = alClient
       Style = tsFlatButtons
@@ -4883,8 +4889,8 @@ object fStampy: TfStampy
         object sgPeriods: TStringGrid
           Left = 0
           Top = 30
-          Width = 805
-          Height = 301
+          Width = 343
+          Height = 207
           Align = alClient
           DefaultRowHeight = 21
           FixedCols = 0
@@ -4892,14 +4898,17 @@ object fStampy: TfStampy
           TabOrder = 0
           OnDblClick = sgPeriodsDblClick
           OnMouseDown = sgPeriodsMouseDown
+          ExplicitWidth = 805
+          ExplicitHeight = 301
         end
         object pCurrentDayTop: TPanel
           Left = 0
           Top = 0
-          Width = 805
+          Width = 343
           Height = 30
           Align = alTop
           TabOrder = 1
+          ExplicitWidth = 805
           object lCurrentDay: TLabel
             Left = 55
             Top = 7
@@ -4921,13 +4930,13 @@ object fStampy: TfStampy
         end
       end
       object tsAnalysis: TTabSheet
-        Caption = 'Time Domain Analysis'
+        Caption = 'Work Time Analysis'
         ImageIndex = 1
         object sgAnalysis: TStringGrid
           Left = 0
           Top = 65
-          Width = 805
-          Height = 266
+          Width = 343
+          Height = 172
           Align = alClient
           DefaultRowHeight = 21
           FixedCols = 0
@@ -4936,18 +4945,19 @@ object fStampy: TfStampy
         object pAnalysisSelection: TPanel
           Left = 0
           Top = 0
-          Width = 805
+          Width = 343
           Height = 65
           Align = alTop
           TabOrder = 1
-          object lDomainCount: TLabel
+          ExplicitWidth = 805
+          object lRange: TLabel
             Left = 86
             Top = 4
             Width = 33
             Height = 13
             Caption = 'Count:'
           end
-          object seDomainCount: TSpinEdit
+          object seRange: TSpinEdit
             Left = 125
             Top = 1
             Width = 48
@@ -5043,8 +5053,8 @@ object fStampy: TfStampy
     Params.Strings = (
       'DriverID=SQLite')
     BeforeDisconnect = DBBeforeDisconnect
-    Left = 456
-    Top = 144
+    Left = 144
+    Top = 208
   end
   object qInsertHours: TFDQuery
     Connection = DB
@@ -5053,8 +5063,8 @@ object fStampy: TfStampy
       '(Day, TimeStamp, FirstOfDay, Type, Note)'
       'values'
       '(:Day, :TimeStamp, :FirstOfDay, :Type, :Note)')
-    Left = 456
-    Top = 192
+    Left = 344
+    Top = 104
     ParamData = <
       item
         Name = 'DAY'
@@ -5084,8 +5094,8 @@ object fStampy: TfStampy
       'from Hours'
       'where Day = :Day'
       '  and FirstOfDay = :FirstOfDay')
-    Left = 528
-    Top = 144
+    Left = 184
+    Top = 208
     ParamData = <
       item
         Name = 'DAY'
@@ -5104,8 +5114,8 @@ object fStampy: TfStampy
       'where Day = :Day'
       'order by rowid desc'
       'limit 1')
-    Left = 528
-    Top = 192
+    Left = 352
+    Top = 152
     ParamData = <
       item
         Name = 'DAY'
@@ -5117,8 +5127,8 @@ object fStampy: TfStampy
     SQL.Strings = (
       'select *'
       'from Options')
-    Left = 529
-    Top = 240
+    Left = 225
+    Top = 256
   end
   object qReplaceOptions: TFDQuery
     Connection = DB
@@ -5127,8 +5137,8 @@ object fStampy: TfStampy
       '(Key, Value)'
       'values'
       '(:Key, :Value)')
-    Left = 529
-    Top = 288
+    Left = 361
+    Top = 256
     ParamData = <
       item
         Name = 'KEY'
@@ -5147,8 +5157,8 @@ object fStampy: TfStampy
       'WHERE type = '#39'table'#39
       '  AND name != '#39'android_metadata'#39
       '  AND name != '#39'sqlite_sequence'#39';')
-    Left = 385
-    Top = 144
+    Left = 89
+    Top = 208
   end
   object qDay: TFDQuery
     Connection = DB
@@ -5157,8 +5167,8 @@ object fStampy: TfStampy
       'from Hours'
       'where Day = :Day'
       'order by TimeStamp, rowid')
-    Left = 385
-    Top = 192
+    Left = 233
+    Top = 208
     ParamData = <
       item
         Name = 'DAY'
@@ -5168,14 +5178,14 @@ object fStampy: TfStampy
   object UpdateTimer: TTimer
     Enabled = False
     OnTimer = UpdateTimerTimer
-    Left = 177
-    Top = 289
+    Left = 273
+    Top = 105
   end
   object ApplicationEvents: TApplicationEvents
     OnMinimize = ApplicationEventsMinimize
     OnRestore = ApplicationEventsRestore
-    Left = 97
-    Top = 288
+    Left = 161
+    Top = 152
   end
   object TrayIcon: TTrayIcon
     Hint = 'Trust-Based Working Hours'
@@ -5184,12 +5194,12 @@ object fStampy: TfStampy
     Visible = True
     OnDblClick = TrayIconDblClick
     OnMouseMove = TrayIconMouseMove
-    Left = 97
-    Top = 240
+    Left = 145
+    Top = 104
   end
   object ActionList: TActionList
-    Left = 17
-    Top = 240
+    Left = 89
+    Top = 104
     object acStart: TAction
       Caption = 'Start'
       OnExecute = acStartExecute
@@ -5224,8 +5234,8 @@ object fStampy: TfStampy
     end
   end
   object pmTray: TPopupMenu
-    Left = 17
-    Top = 288
+    Left = 89
+    Top = 152
     object miHideRestore: TMenuItem
       Action = acMinimize
     end
@@ -5249,8 +5259,8 @@ object fStampy: TfStampy
     end
   end
   object pmPeriods: TPopupMenu
-    Left = 177
-    Top = 241
+    Left = 201
+    Top = 105
     object miChangePeriod: TMenuItem
       Caption = 'Change Period'
       OnClick = miChangePeriodClick
@@ -5269,8 +5279,8 @@ object fStampy: TfStampy
       '    Type = :Type,'
       '    FirstOfDay = :FirstOfDay'
       'where rowid = :rowid')
-    Left = 385
-    Top = 241
+    Left = 289
+    Top = 209
     ParamData = <
       item
         Name = 'DAY'
@@ -5299,8 +5309,8 @@ object fStampy: TfStampy
       'delete'
       'from Hours'
       'where rowid = :rowid')
-    Left = 457
-    Top = 241
+    Left = 369
+    Top = 209
     ParamData = <
       item
         Name = 'ROWID'
@@ -5315,8 +5325,8 @@ object fStampy: TfStampy
       'where TimeStamp >= :start'
       '  and TimeStamp < :end'
       'order by TimeStamp asc')
-    Left = 457
-    Top = 288
+    Left = 289
+    Top = 256
     ParamData = <
       item
         Name = 'START'
@@ -5331,7 +5341,7 @@ object fStampy: TfStampy
     Enabled = False
     Interval = 1
     OnTimer = ShutDownTimerTimer
-    Left = 705
-    Top = 297
+    Left = 257
+    Top = 153
   end
 end

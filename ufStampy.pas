@@ -19,7 +19,7 @@ const
 
 type
   THoursType = (htOnTime, htOffTime, htPause);
-  TPunchMode = (pmAdvanced, pmSimple);
+  TStampMode = (pmAdvanced, pmSimple);
 
   TOption = class(TObject)
   strict private
@@ -172,8 +172,8 @@ type
     tsAnalysis: TTabSheet;
     sgAnalysis: TStringGrid;
     pAnalysisSelection: TPanel;
-    lDomainCount: TLabel;
-    seDomainCount: TSpinEdit;
+    lRange: TLabel;
+    seRange: TSpinEdit;
     rgAnalysisMode: TRadioGroup;
     bLoadAnalysis: TButton;
     tsOptions: TTabSheet;
@@ -225,7 +225,7 @@ type
     FLastUpdateTimers: TDateTime;
     FHiddenInTray: Boolean;
     FInCurrentDayChange: Boolean;
-    FCurrentMode: TPunchMode;
+    FCurrentMode: TStampMode;
     FWidth: Integer;
     FHeight: Integer;
     FpButtonsWidth: Integer;
@@ -280,7 +280,7 @@ type
     function GetWeeklyWorkDays: Integer;
     function GetStdPauseDuration: Integer;
     procedure SetMode(const ModeName: string); overload;
-    procedure SetMode(const NewMode: TPunchMode); overload;
+    procedure SetMode(const NewMode: TStampMode); overload;
     procedure SwitchMode;
     procedure MinimizeToTray;
     function GetCurrentDayDateTime: TDateTime;
@@ -299,8 +299,8 @@ uses
 
 const
   HoursTypeNames: array[THoursType] of string = ('On-Time', 'Off-Time', 'Pause');
-  ModeNames: array[TPunchMode] of string = ('Advanced', 'Simple');
-  PunchModeOptionName = 'PunchMode';
+  ModeNames: array[TStampMode] of string = ('Advanced', 'Simple');
+  StampModeOptionName = 'StampMode';
   LastReportFile = 'LastReportFile';
 
 type
@@ -392,13 +392,13 @@ begin
 
   if AltAvgHours = 0 then
   begin
-    Result := Format('%s%.2d:%.2d (Ø %s%.2d:%.2d)', [Sign, Trunc(TotalHours), Round(Frac(TotalHours)
+    Result := Format('%s%.2d:%.2d (ï¿½ %s%.2d:%.2d)', [Sign, Trunc(TotalHours), Round(Frac(TotalHours)
           * 60),
         Sign, Trunc(AvgHours), Round(Frac(AvgHours) * 60)]);
   end
   else
   begin
-    Result := Format('%s%.2d:%.2d (Ø %s%.2d:%.2d | %s%.2d:%.2d)', [Sign, Trunc(TotalHours),
+    Result := Format('%s%.2d:%.2d (ï¿½ %s%.2d:%.2d | %s%.2d:%.2d)', [Sign, Trunc(TotalHours),
         Round(Frac(TotalHours) * 60),
         Sign, Trunc(AvgHours), Round(Frac(AvgHours) * 60),
         Sign, Trunc(AltAvgHours), Round(Frac(AltAvgHours) * 60)]);
@@ -603,7 +603,7 @@ begin
   while not qOptions.Eof do
   begin
     try
-      if qOptions.FieldByName('Key').AsString = PunchModeOptionName then
+      if qOptions.FieldByName('Key').AsString = StampModeOptionName then
       begin
         SetMode(qOptions.FieldByName('Value').AsString);
         Continue;
@@ -862,7 +862,7 @@ Summary:        | [hh]:nn (avg: [hh]:nn)  | [hh]:nn (avg: [hh]:nn)
 .
 ddd. dd.mm.yyyy | [hh]:nn                 | [hh]:nn
 ddd. dd.mm.yyyy | [hh]:nn                 | [hh]:nn
-Summary:        | [hh]:nn (Ø: [hh]:nn)  | [hh]:nn (Ø: [hh]:nn)
+Summary:        | [hh]:nn (ï¿½: [hh]:nn)  | [hh]:nn (ï¿½: [hh]:nn)
 }
 procedure TfStampy.PrintWeeks(
   const Weeks: TObjectList < TObjectList<TDay> > ; const StringGrid: TStringGrid);
@@ -1100,7 +1100,7 @@ begin
   end;
 end;
 
-procedure TfStampy.SetMode(const NewMode: TPunchMode);
+procedure TfStampy.SetMode(const NewMode: TStampMode);
 begin
   if NewMode = FCurrentMode then
   begin
@@ -1144,14 +1144,14 @@ begin
   end;
 
   FCurrentMode := NewMode;
-  SaveOption(PunchModeOptionName, ModeNames[FCurrentMode]);
+  SaveOption(StampModeOptionName, ModeNames[FCurrentMode]);
 end;
 
 procedure TfStampy.SetMode(const ModeName: string);
 var
-  Mode: TPunchMode;
+  Mode: TStampMode;
 begin
-  for Mode := Low(TPunchMode) to High(TPunchMode) do
+  for Mode := Low(TStampMode) to High(TStampMode) do
   begin
     if ModeName = ModeNames[Mode] then
     begin
@@ -1216,7 +1216,7 @@ end;
 
 procedure TfStampy.SwitchMode;
 begin
-  SetMode(TPunchMode((Integer(FCurrentMode) + 1) mod (Integer(High(TPunchMode)) + 1)));
+  SetMode(TStampMode((Integer(FCurrentMode) + 1) mod (Integer(High(TStampMode)) + 1)));
 end;
 
 procedure TfStampy.TrayIconDblClick(Sender: TObject);
@@ -1590,12 +1590,12 @@ begin
   case rgAnalysisMode.ItemIndex of
     0: // Weeks
       begin
-        WeeksStatistics(Trunc(Date), seDomainCount.Value);
+        WeeksStatistics(Trunc(Date), seRange.Value);
       end;
 
     1: // Months
       begin
-        MonthsStatistics(Trunc(Date), seDomainCount.Value);
+        MonthsStatistics(Trunc(Date), seRange.Value);
       end;
   end;
 end;
